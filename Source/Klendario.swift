@@ -65,6 +65,12 @@ public class Klendario {
             completion?(false, status, KDError.authorizationFailed(reason: .authorizationRestricted))
         case .denied:
             completion?(false, status, KDError.authorizationFailed(reason: .authorizationDenied))
+        case .fullAccess:
+            completion?(true, status, nil)
+        case .writeOnly:
+            completion?(false, status, KDError.authorizationFailed(reason: .authorizationDenied))
+        @unknown default:
+            completion?(false, status, KDError.authorizationFailed(reason: .authorizationDenied))
         }
     }
     
